@@ -1,33 +1,33 @@
-#include "stdafx.h" // en-têtes précompilées de visual studio, notre IDE (interface de développement)
-#include <iostream> // fonctions standard d'entrées et sorties console
-#include <string> // pour avoir accès aux fonctions de chaines dynamiques (les "strings")
-#include <Windows.h> // pour pouvoir faire "dormir" le programme ainsi que tester les entrées claviers sans cout ou cin
-#include "visualisation.h" // notre autre partie de code utilisée à la fin pour visualiser l'ADN
+#include "stdafx.h" // en-tÃªtes prÃ©compilÃ©es de visual studio, notre IDE (interface de dÃ©veloppement)
+#include <iostream> // fonctions standard d'entrÃ©es et sorties console
+#include <string> // pour avoir accÃ¨s aux fonctions de chaines dynamiques (les "strings")
+#include <Windows.h> // pour pouvoir faire "dormir" le programme ainsi que tester les entrÃ©es claviers sans cout ou cin
+#include "visualisation.h" // notre autre partie de code utilisÃ©e Ã  la fin pour visualiser l'ADN
 
-using namespace std; // en C++ le namespace sert à ne pas avoir à indiquer les fonctions issues d'includes les plus utilisés, ici les fonctions des includes standards
+using namespace std; // en C++ le namespace sert Ã  ne pas avoir Ã  indiquer les fonctions issues d'includes les plus utilisÃ©s, ici les fonctions des includes standards
 
-void printTextToBin(string charChain); // déclaration des prototypes en amont afin de pouvoir visualiser la fonction main en premier
-void printBinToNucleo(string binChain);// sinon nous aurions du créer les fonctions au dessus de la fonction main pour aider le compilateur
+void printTextToBin(string charChain); // dÃ©claration des prototypes en amont afin de pouvoir visualiser la fonction main en premier
+void printBinToNucleo(string binChain);// sinon nous aurions du crÃ©er les fonctions au dessus de la fonction main pour aider le compilateur
 
-string binChain, nucleoChainA, nucleoChainB;// en variable globale pour ne pas avoir à mettre trop d'arguments ou de fonctions en chaine
+string binChain, nucleoChainA, nucleoChainB;// en variable globale pour ne pas avoir Ã  mettre trop d'arguments ou de fonctions en chaine
 
 
 int main()
 {
 	string charChain;
-	char eAccentGrave = 138, eAccentAigu = 130, eAccentCirc = 136; // nous aidons la console à afficher les accents car ils font partis d'une version étendue de l'ASCII, et le compilateur peut mal interpréter nos accents
-	cout << "Bonjour, veuillez rentrer une chaine de caract" << eAccentGrave << "res afin de commencer un exemple de conversion" << endl << endl;
+	char eAccentGrave = 138, eAccentAigu = 130, eAccentCirc = 136; // nous aidons la console Ã  afficher les accents car ils font partis d'une version Ã©tendue de l'ASCII, et le compilateur peut mal interprÃ©ter nos accents
+	cout << "Bonjour, veuillez rentrer une chaine de caract" << eAccentGrave << "res afin de commencer un exemple de conversion" << endl << endl << "Vous avez entr" << eAccentAigu << " : ";
 	getline(cin,charChain); cout << endl << "Correspondance binnaire : ";
 	printTextToBin(charChain);
 	cout << "Correspondance en nucl" << eAccentAigu << "otides : " << endl;
 	printBinToNucleo(binChain);
 	cout << endl << "appuyez sur ENTER pour lancer la fen" << eAccentCirc << "tre de visualisation" << endl;
-	while (GetAsyncKeyState(0x0D)) // on attend une première fois que l'utilisateur lache la touche entrée
-		Sleep(1); // pour relacher le cpu, il est inutile de vérifier la touche des millions de fois par seconde
-	while (!GetAsyncKeyState(0x0D)) // 0x0D = touche entrée (quand l'utilisateur réappuie pour confirmer
-		Sleep(1); // de même, nous relachons le CPU
-	visualisation maVisualisation; // créer une classe de visualisation, permettant de séparer les codes.
-	maVisualisation.start(nucleoChainA, nucleoChainB); // nous donnons l'ordre de lancer la visualisation en donnant nos chaines obtenues. Cette partie du programme continuera pour fermer la console à la fin du programme de visualisation
+	while (GetAsyncKeyState(0x0D)) // on attend une premiÃ¨re fois que l'utilisateur lache la touche entrÃ©e
+		Sleep(1); // pour relacher le cpu, il est inutile de vÃ©rifier la touche des millions de fois par seconde
+	while (!GetAsyncKeyState(0x0D)) // 0x0D = touche entrÃ©e (quand l'utilisateur rÃ©appuie pour confirmer
+		Sleep(1); // de mÃªme, nous relachons le CPU
+	visualisation maVisualisation; // crÃ©er une classe de visualisation, permettant de sÃ©parer les codes.
+	maVisualisation.start(nucleoChainA, nucleoChainB); // nous donnons l'ordre de lancer la visualisation en donnant nos chaines obtenues. Cette partie du programme continuera pour fermer la console Ã  la fin du programme de visualisation
     return 0;
 }
 
@@ -38,7 +38,7 @@ void printTextToBin(string charChain) // notre fonction permettant la conversion
 	for (int i = 0; i < chainSize; i++)
 	{
 		currentChar = charChain[i];
-		for (int j = 7; j >= 0; j--) // on commence avec j à 7 car nous partons de gauche, comme le sens de lecture conventionnel
+		for (int j = 7; j >= 0; j--) // on commence avec j Ã  7 car nous partons de gauche, comme le sens de lecture conventionnel
 		{
 			if (currentChar & (1u << j)) // ligne importante, voir ducomentation
 			{
@@ -53,7 +53,7 @@ void printTextToBin(string charChain) // notre fonction permettant la conversion
 	cout << binChain << endl << endl;
 }
 
-void printBinToNucleo(string binChain) // notre fonction permettant de convertir le "faux binaire" en deux chaines azotées et de les afficher séparément
+void printBinToNucleo(string binChain) // notre fonction permettant de convertir le "faux binaire" en deux chaines azotÃ©es et de les afficher sÃ©parÃ©ment
 {
 	char currentBit[2];
 	const int chainSize = binChain.size();
